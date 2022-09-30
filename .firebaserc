@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "fir-crud-test-85cea"
+  },
+  "targets": {
+    "fir-crud-test-85cea": {
+      "hosting": {
+        "firebase-crud-test": [
+          "fir-crud-test-85cea"
+        ]
+      }
+    }
+  }
+}
