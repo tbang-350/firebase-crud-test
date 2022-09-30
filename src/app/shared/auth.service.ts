@@ -42,6 +42,14 @@ export class AuthService {
         // Signed in 
         const user = userCredential.user;
         // ...
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Login succesfull',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        localStorage.setItem('token', 'true');
         this.router.navigate(['/dashboard']);
       })
       .catch((error) => {
@@ -87,6 +95,27 @@ export class AuthService {
       localStorage.removeItem('token');
       this.router.navigate(['/login']);
     }, err => {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'warning',
+        title: err.message,
+        showConfirmButton: false,
+        timer: 2000
+      })
+    })
+  }
+
+  forgotPassword(email: string){
+    this.fireAuth.sendPasswordResetEmail(email).then(()=>{
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'email sent succesfully',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      this.router.navigate(['/verify-email'])
+    },err => {
       Swal.fire({
         position: 'top-end',
         icon: 'warning',

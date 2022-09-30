@@ -12,7 +12,7 @@ export class RegisterComponent implements AfterViewInit {
   // email :string = '';
   // password: string = '';
 
-  registerForm!: FormGroup;
+  createForm!: FormGroup;
 
   constructor(private auth: AuthService) { }
 
@@ -27,7 +27,7 @@ export class RegisterComponent implements AfterViewInit {
   // }
 
   formConfiguration(){
-    this.registerForm = new FormGroup({
+    this.createForm = new FormGroup({
       email:new FormControl(null,Validators.required),
       password: new FormControl(null,Validators.required)
     })
@@ -35,14 +35,13 @@ export class RegisterComponent implements AfterViewInit {
 
   register(){
 
-    console.log(this.registerForm.value)
-    console.log(this.registerForm.get('email')?.value)
-    console.log(this.registerForm.controls['email'].value)
+    console.log(this.createForm.value)
+    console.log(this.createForm.get('email')?.value)
+    console.log(this.createForm.controls['email'].value)
 
     
-    this.auth.register(this.registerForm.controls['email'].value,this.registerForm.controls['password'].value);
-    // this.email = '';
-    // this.password = '';
+    this.auth.register(this.createForm.controls['email'].value,this.createForm.controls['password'].value);
+    
   }
 
 }

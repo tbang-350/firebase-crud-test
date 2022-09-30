@@ -14,6 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 import * as firebase from 'firebase/app';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 firebase.initializeApp(environment.firebase);
 
 @NgModule({
@@ -22,6 +24,8 @@ firebase.initializeApp(environment.firebase);
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent,
     
   ],
   imports: [
