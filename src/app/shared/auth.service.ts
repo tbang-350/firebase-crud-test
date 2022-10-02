@@ -69,7 +69,7 @@ export class AuthService {
 
 
   register(email: string, password: string) {
-    this.fireAuth.createUserWithEmailAndPassword(email, password).then(() => {
+    this.fireAuth.createUserWithEmailAndPassword(email, password).then(res => {
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -77,6 +77,8 @@ export class AuthService {
         showConfirmButton: false,
         timer: 1500
       })
+      this.sendEmailForVerification(res.user);
+      console.log(res.user);
       this.router.navigate(['/login']);
     }, err => {
       Swal.fire({
@@ -116,6 +118,20 @@ export class AuthService {
       })
       this.router.navigate(['/verify-email'])
     },err => {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'warning',
+        title: err.message,
+        showConfirmButton: false,
+        timer: 2000
+      })
+    })
+  }
+
+  sendEmailForVerification(user:any){
+    user.sendEmailVerification().then((res:any)=>{
+      this.router.navigate(['verify-email'])
+    },(err:any)=>{
       Swal.fire({
         position: 'top-end',
         icon: 'warning',

@@ -9,15 +9,15 @@ import { AuthService } from 'src/app/shared/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  // email!: string;
-  // password!: string;
+  email!: string;
+  password!: string;
   loginForm!:FormGroup
 
   constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.formConfiguration();
-    this.login();
+    // this.formConfiguration();
+    // this.login();
   }
 
   formConfiguration(){
@@ -27,28 +27,33 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  login(){
-    console.log(this.loginForm.value)
-    console.log(this.loginForm.get('email')?.value)
-    console.log(this.loginForm.controls['email'].value)
-
-    this.auth.login(this.loginForm.controls['email'].value,this.loginForm.controls['password'].value);
-
-  }
-
-
   // login(){
-  //   if(this.email == ''){
-  //     alert('enter email');
-  //     return
-  //   }
+  //   console.log(this.loginForm.value)
+  //   console.log(this.loginForm.get('email')?.value)
+  //   console.log(this.loginForm.controls['email'].value)
 
-  //   if(this.password == ''){
-  //     alert('enter password');
-  //     return
-  //   }
+  //   this.auth.login(this.loginForm.controls['email'].value,this.loginForm.controls['password'].value);
 
-  //   this.auth.login(this.email,this.password);
   // }
+
+
+  login(){
+    if(this.email == ''){
+      alert('enter email');
+      return
+    }
+
+    if(this.password == ''){
+      alert('enter password');
+      return
+    }
+
+    // this.email = '';
+    // this.password = '';
+
+    console.log(this.email,this.password);
+
+    this.auth.login(this.email,this.password);
+  }
 
 }

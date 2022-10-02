@@ -10,12 +10,13 @@ import { AuthService } from 'src/app/shared/auth.service';
 export class ForgotPasswordComponent implements OnInit {
 
   forgotForm!: FormGroup
+  email!: string;
 
   constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.formConfiguration();
-    this.forgotPassword();
+    // this.formConfiguration();
+    // this.forgotPassword();
   }
 
   formConfiguration(){
@@ -25,7 +26,7 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   forgotPassword(){
-    this.auth.forgotPassword(this.forgotForm.value)
+    this.auth.forgotPassword(this.email);
   }
 
 }

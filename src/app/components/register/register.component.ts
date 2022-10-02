@@ -9,16 +9,16 @@ import { AuthService } from 'src/app/shared/auth.service';
 })
 export class RegisterComponent implements AfterViewInit {
 
-  // email :string = '';
-  // password: string = '';
+  email :string = '';
+  password: string = '';
 
   createForm!: FormGroup;
 
   constructor(private auth: AuthService) { }
 
   ngAfterViewInit(): void {
-    this.formConfiguration();
-    this.register()
+    // this.formConfiguration();
+    // this.register()
   }
 
   // ngOnInit(): void {
@@ -33,15 +33,34 @@ export class RegisterComponent implements AfterViewInit {
     })
   }
 
+  // register(){
+
+  //   console.log(this.createForm.value)
+  //   console.log(this.createForm.get('email')?.value)
+  //   console.log(this.createForm.controls['email'].value)
+
+    
+  //   this.auth.register(this.createForm.controls['email'].value,this.createForm.controls['password'].value);
+    
+  // }
+
   register(){
+    if(this.email == ''){
+      alert('enter email');
+      return;
+    }
 
-    console.log(this.createForm.value)
-    console.log(this.createForm.get('email')?.value)
-    console.log(this.createForm.controls['email'].value)
+    if(this.password == ''){
+      alert('enter password');
+      return;
+    }
 
-    
-    this.auth.register(this.createForm.controls['email'].value,this.createForm.controls['password'].value);
-    
+    this.auth.register(this.email,this.password);
+
+    // this.email = '';
+    // this.password = '';
+
+    console.log(this.email,this.password)
   }
 
 }
