@@ -1,16 +1,47 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark pl-5 pr-5">
+<div class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark pl-5 pr-5">
     <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        
+
       </ul>
-      
-        
-        <button class="btn btn-outline-danger my-2 my-sm-0" (click)="logout()" type="button">Logout</button>
-      
+
+      <button class="btn btn-outline-danger my-2 my-sm-0" (click)="logout()" type="button">Logout</button>
+
     </div>
   </nav>
+</div>
+
+<div class="container-fluid m-5 ">
+  <div class="row">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="first_name">
+        <label for="firstName">First Name</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control rounded-left" id="lastName" name="firstName" [(ngModel)]="last_name">
+        <label for="floatingPassword">Last Name</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email">
+        <label for="floatingInput">Email address</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="phone">
+        <label for="floatingPassword">Password</label>
+      </div>
+      <div class=" ">
+        <button type="button" (click)="addStudent()" class="btn btn-primary rounded submit p-2 px-3">Add Student</button>
+    </div>
+    </div>
+  </div>
+</div>

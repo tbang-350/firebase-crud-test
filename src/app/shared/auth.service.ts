@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import Swal from 'sweetalert2';
+import { GoogleAuthProvider, GithubAuthProvider,FacebookAuthProvider } from 'firebase/auth';
 
 
 @Injectable({
@@ -36,35 +37,58 @@ export class AuthService {
   // }
 
   login(email: string, password: string) {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        // ...
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Login succesfull',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        localStorage.setItem('token', 'true');
-        this.router.navigate(['/dashboard']);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // Swal.fire({
-        //   position: 'top-end',
-        //   icon: 'warning',
-        //   title: error.message,
-        //   showConfirmButton: false,
-        //   timer: 2000
-        // })
-        console.log(errorMessage);
-        console.log(errorMessage);
+
+    this.fireAuth.signInWithEmailAndPassword(email,password).then(res => {
+      
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Login succesfull',
+        showConfirmButton: false,
+        timer: 1500
       });
+      localStorage.setItem('token','true');
+
+      if(res.user?.emailVerified == true){
+        this.router.navigate(['/dashboard']);
+      }else{
+        this.router.navigate(['/verify-email']);
+      }
+
+      
+    })
+
+
+    // const auth = getAuth();
+    // signInWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     // Signed in 
+    //     const user = userCredential.user;
+    //     // ...
+    //     Swal.fire({
+    //       position: 'top-end',
+    //       icon: 'success',
+    //       title: 'Login succesfull',
+    //       showConfirmButton: false,
+    //       timer: 1500
+    //     })
+    //     localStorage.setItem('token', 'true');
+
+    //     this.router.navigate(['/dashboard']);
+    //   })
+    //   .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     // Swal.fire({
+    //     //   position: 'top-end',
+    //     //   icon: 'warning',
+    //     //   title: error.message,
+    //     //   showConfirmButton: false,
+    //     //   timer: 2000
+    //     // })
+    //     console.log(errorMessage);
+    //     console.log(errorMessage);
+    //   });
   }
 
 
@@ -141,6 +165,31 @@ export class AuthService {
       })
     })
   }
+
+googleSignIn(){
+  return this.fireAuth.signInWithPopup(new GoogleAuthProvider).then( res =>{
+
+    this.router.navigate(['/dashboard'])
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'login succesful',
+      showConfirmButton: false,
+      timer: 2000
+    })
+    localStorage.setItem('token',JSON.stringify(res.user?.uid))
+
+  },err => {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'warning',
+      title: err.message,
+      showConfirmButton: false,
+      timer: 2000
+    })
+
+  })
+}
 
 
 }
