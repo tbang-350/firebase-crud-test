@@ -11,9 +11,9 @@ import Swal from 'sweetalert2';
 })
 export class DashboardComponent implements OnInit {
 
-  studentList : Student[] = [];
+  studentList: Student[] = [];
 
-  studentObj : Student = {
+  studentObj: Student = {
     id: '',
     first_name: '',
     last_name: '',
@@ -22,24 +22,24 @@ export class DashboardComponent implements OnInit {
   }
 
   id: string = '';
-  first_name : string = '';
+  first_name: string = '';
   last_name: string = '';
   email: string = '';
-  phone : string = '';
+  phone: string = '';
 
-  constructor(private auth: AuthService , private data :DataService) { }
+  constructor(private auth: AuthService, private data: DataService) { }
 
   ngOnInit(): void {
     this.getAllStudents();
   }
 
-  logout(){
+  logout() {
     this.auth.logout();
   }
 
-  getAllStudents(){
+  getAllStudents() {
     this.data.getAllStudents().subscribe(res => {
-      this.studentList = res.map((e:any)=>{
+      this.studentList = res.map((e: any) => {
         const data = e.payload.doc.data();
         data.id = e.payload.doc.id;
         return data;
@@ -47,16 +47,25 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  resetForm(){
+  resetForm() {
     this.first_name = '',
-    this.last_name = '',
-    this.email = '',
-    this.phone = ''
+      this.last_name = '',
+      this.email = '',
+      this.phone = ''
   }
 
-  addStudent(){
-    if(this.first_name == '' || this.last_name == '' || this.email == '' || this.phone == ''){
+  addStudent() {
+    if (this.first_name == '' || this.last_name == '' || this.email == '' || this.phone == '') {
       alert("Fill the required fields")
+    } else {
+      this.studentObj.id = '';
+      this.studentObj.email = this.email
+      this.studentObj.first_name = this.first_name;
+      this.studentObj.last_name = this.last_name;
+      this.studentObj.phone = this.phone
+
+      this.data.createStudent(this.studentObj);
+      this.resetForm();
     }
 
     this.studentObj.id = '';
@@ -70,11 +79,11 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  updateStudent(){
+  updateStudent() {
 
   }
 
-  deleteStudent(student: Student){
+  deleteStudent(student: Student) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",

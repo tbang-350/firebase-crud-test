@@ -16,6 +16,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import * as firebase from 'firebase/app';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { FileuploadComponent } from './components/fileupload/fileupload.component';
 firebase.initializeApp(environment.firebase);
 
 @NgModule({
@@ -26,6 +27,7 @@ firebase.initializeApp(environment.firebase);
     DashboardComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
+    FileuploadComponent,
     
   ],
   imports: [

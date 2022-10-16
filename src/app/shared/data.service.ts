@@ -19,7 +19,7 @@ export class DataService {
   }
 
   deleteStudent(student : Student){
-    return this.afs.doc('/Students'+student.id).delete();
+    return this.afs.doc('/Students/'+student.id).delete();
   }
 
   updateStudent(student: Student){
